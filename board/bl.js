@@ -26,10 +26,10 @@ const addTicketToColumn = (board, user, columnName, ticketDto) =>
     S.pipe([
         authorizeBoardAction(user, board),
         S.find(x => x.name === columnName),
-        S.map(column => column.tickets.push(column)),
+        S.map(column => column.tickets.push(ticketDto)),
         S.map(column => ({
             ...board,
-            columns: board.colomns.map(x => x.name === column ? column : x)
+            columns: board.colomns.map(x => x.name === columnName ? column : x)
         }))
     ])()
 
