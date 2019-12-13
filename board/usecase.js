@@ -1,8 +1,6 @@
 const DAL = require('./dal');
 const S = require('sanctuary');
 const BL = require('./bl');
-const SMaybe = require('sanctuary-maybe');
-const SEither = require('sanctuary-either');
 const FP = require('../util/FP');
 const { BLException } = require('../util/errors');
 
