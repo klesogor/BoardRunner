@@ -4,5 +4,6 @@ const eitherAsync = S.either(v => Promise.reject(v))(v => Promise.resolve(v));
 const first = arr => arr[0];
 const second = arr => arr[1];
 const log = v => console.log(v) || v;
+const delay = duration => new Promise(res => setTimeout(res,duration));
 
-module.exports = exports = { maybeAsync, eitherAsync, first, second, log }
+module.exports = exports = { maybeAsync, eitherAsync, first, second, log, delay }

@@ -2,6 +2,7 @@ const BoardBL = require('../board/bl');
 const mockBoard = { name: 'Mock board' };
 const mockUser = { name: 'Mock user', _id: 'fake' };
 const S = require('sanctuary');
+const FP = require('../util/FP');
 const Err = require('../util/errors');
 
 describe('Create board tests', () => {
@@ -86,5 +87,22 @@ describe('Add ticket tests', () => {
         const boardWithColumn = S.fromEither({})(BoardBL.addColumn(S.Just(board), S.Just(mockUser), { name: 'test', tickets: [] }));
         const res = BoardBL.addTicketToColumn(S.Just(boardWithColumn), S.Just(mockUser), 'test', { name: 'test' });
         expect(S.fromEither({ columns: [{ tickets: [] }] })(res).columns[0].tickets.length).toBe(1);
+    });
+
+    describe('Timeouts', () => {
+        it('Sould timeout', () => {
+                Promise.race(
+                    FP.delay(100),
+                    FP.delay(50).then(S.K(Promise.reject('Timeout')))
+                ).then(() => expect(false).toBe(true))
+                .catch(() => expect(true).toBe(true))
+        });
+        it('Sould not timeout', () => {
+            Promise.race(
+                FP.delay(50),
+                FP.delay(100).then(S.K(Promise.reject('Timeout')))
+            ).then(() => expect(true).toBe(true))
+            .catch(() => expect(false).toBe(true))
+    });
     });
 });
