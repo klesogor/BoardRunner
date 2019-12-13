@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "jest"
   },
   "dependencies": {
     "@hapi/joi": "^16.1.7",
@@ -17,5 +18,8 @@
     "sanctuary": "^2.0.1",
     "sanctuary-either": "^2.0.0",
     "sanctuary-maybe": "^2.0.0"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0"
   }
 }
