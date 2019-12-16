@@ -93,14 +93,14 @@ describe('Add ticket tests', () => {
         it('Sould timeout', () => {
                 Promise.race(
                     FP.delay(100),
-                    FP.delay(50).then(S.K(Promise.reject('Timeout')))
+                    FP.delay(50).then(() => Promise.reject('Timeout'))
                 ).then(() => expect(false).toBe(true))
                 .catch(() => expect(true).toBe(true))
         });
         it('Sould not timeout', () => {
             Promise.race(
                 FP.delay(50),
-                FP.delay(100).then(S.K(Promise.reject('Timeout')))
+                FP.delay(100).then(() => Promise.reject('Timeout'))
             ).then(() => expect(true).toBe(true))
             .catch(() => expect(false).toBe(true))
     });
