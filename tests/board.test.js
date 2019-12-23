@@ -91,10 +91,10 @@ describe('Add ticket tests', () => {
 
     describe('Timeouts', () => {
         it('Sould timeout', () => {
-                Promise.race(
-                    FP.delay(100),
-                    FP.delay(50).then(() => Promise.reject('Timeout'))
-                ).then(() => expect(false).toBe(true))
+            Promise.race(
+                FP.delay(100),
+                FP.delay(50).then(() => Promise.reject('Timeout'))
+            ).then(() => expect(false).toBe(true))
                 .catch(() => expect(true).toBe(true))
         });
         it('Sould not timeout', () => {
@@ -102,7 +102,7 @@ describe('Add ticket tests', () => {
                 FP.delay(50),
                 FP.delay(100).then(() => Promise.reject('Timeout'))
             ).then(() => expect(true).toBe(true))
-            .catch(() => expect(false).toBe(true))
-    });
+                .catch(() => expect(false).toBe(true))
+        });
     });
 });
